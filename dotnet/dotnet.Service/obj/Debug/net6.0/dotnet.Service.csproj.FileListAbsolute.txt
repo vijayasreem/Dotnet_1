@@ -18,3 +18,6 @@ E:\Projects\Sacral\dotnet_service\Application.API\SacralAI.Code.Scheduler\bin\De
 E:\Projects\Sacral\dotnet_service\Application.API\SacralAI.Code.Scheduler\bin\Debug\Apps\1\1460\202308305440\dotnet\dotnet.Service\obj\Debug\net6.0\dotnet.Service.dll
 E:\Projects\Sacral\dotnet_service\Application.API\SacralAI.Code.Scheduler\bin\Debug\Apps\1\1460\202308305440\dotnet\dotnet.Service\obj\Debug\net6.0\refint\dotnet.Service.dll
 E:\Projects\Sacral\dotnet_service\Application.API\SacralAI.Code.Scheduler\bin\Debug\Apps\1\1460\202308305440\dotnet\dotnet.Service\obj\Debug\net6.0\dotnet.Service.pdb
+E:\Projects\Sacral\dotnet_service\Application.API\SacralAI.Code.Scheduler\bin\Debug\Apps\1\1459\202308301906\dotnet\dotnet.Service\obj\Debug\net6.0\dotnet.Service.dll
+E:\Projects\Sacral\dotnet_service\Application.API\SacralAI.Code.Scheduler\bin\Debug\Apps\1\1459\202308301906\dotnet\dotnet.Service\obj\Debug\net6.0\refint\dotnet.Service.dll
+E:\Projects\Sacral\dotnet_service\Application.API\SacralAI.Code.Scheduler\bin\Debug\Apps\1\1459\202308301906\dotnet\dotnet.Service\obj\Debug\net6.0\dotnet.Service.pdb
