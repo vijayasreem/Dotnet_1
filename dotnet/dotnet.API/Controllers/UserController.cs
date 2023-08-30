@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using dotnet.DataAccess;
 using dotnet.DTO;
 using dotnet.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -9,22 +10,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace dotnet.API
 {
     [ApiController]
-    [Route("api/users")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserRegistrationService _userRegistrationService;
+        private readonly UserService _userService;
 
-        public UserController(IUserRegistrationService userRegistrationService)
+        public UserController(UserService userService)
         {
-            _userRegistrationService = userRegistrationService;
+            _userService = userService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateUser(UserRegistrationDTO user)
+        public async Task<IActionResult> CreateUser([FromBody] UserDto user)
         {
             try
             {
-                int userId = await _userRegistrationService.CreateUserAsync(user);
+                var userId = await _userService.CreateUser(user);
                 return Ok(userId);
             }
             catch (Exception ex)
@@ -34,30 +35,43 @@ namespace dotnet.API
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserRegistrationDTO>> GetUserById(int id)
-        {
-            var user = await _userRegistrationService.GetUserByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserRegistrationDTO>>> GetAllUsers()
-        {
-            var users = await _userRegistrationService.GetAllUsersAsync();
-            return Ok(users);
-        }
-
-        [HttpPut]
-        public async Task<ActionResult<bool>> UpdateUser(UserRegistrationDTO user)
+        public async Task<IActionResult> GetUserById(int id)
         {
             try
             {
-                bool isUpdated = await _userRegistrationService.UpdateUserAsync(user);
-                return Ok(isUpdated);
+                var user = await _userService.GetUserById(id);
+                if (user == null)
+                    return NotFound();
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                var users = await _userService.GetAllUsers();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser([FromBody] UserDto user)
+        {
+            try
+            {
+                var result = await _userService.UpdateUser(user);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -66,10 +80,17 @@ namespace dotnet.API
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            bool isDeleted = await _userRegistrationService.DeleteUserAsync(id);
-            return Ok(isDeleted);
+            try
+            {
+                var result = await _userService.DeleteUser(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
